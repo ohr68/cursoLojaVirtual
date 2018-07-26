@@ -7,11 +7,12 @@ namespace Quiron.LojaVirtual.Web.HTMLHelpers
 {
     public static class PaginacaoHelpers
     {
+        //Método responsável por criar a estrutura HTML da paginação dinamicamente
         public static MvcHtmlString PageLinks(this HtmlHelper html, Paginacao paginacao, Func<int,string> paginaUrl)
         {
             StringBuilder resultado = new StringBuilder();
 
-            for (int i = 1; i < paginacao.TotalPaginas; i++)
+            for (int i = 1; i <= paginacao.TotalPaginas; i++)
             {
                 TagBuilder tag = new TagBuilder("a"); //primeira tag a ser criada 
                 tag.MergeAttribute("href",paginaUrl(i)); //cria os valores e atribui ao href
