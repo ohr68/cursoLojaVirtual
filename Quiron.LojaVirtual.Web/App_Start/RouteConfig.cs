@@ -49,7 +49,7 @@ namespace Quiron.LojaVirtual.Web
             //4
             routes.MapRoute(
                 null,
-                "{categoria}Pagina{pagina}",
+                "{categoria}/Pagina{pagina}",
                 new
                 {
                     controller = "Vitrine",

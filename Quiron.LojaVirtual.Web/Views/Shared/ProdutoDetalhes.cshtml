@@ -5,10 +5,21 @@
 }
 
 <div class="well">
+
     <h3><strong>@Model.Nome</strong></h3>
 
 
-    <h3><span class="pull-right label label-primary"> @Model.Preco.ToString("C")</span></h3>
+    <h3><span class="label label-primary pull-right"> @Model.Preco.ToString("C")</span></h3>
+    
+    @using (Html.BeginForm("Adicionar", "Carrinho"))
+    {
+        <!-- É usado o HiddenFor para ter acesso ao model-->
+        <div class="pull-right">
+            @Html.HiddenFor(x => x.ProdutoId)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+            <input type="submit" class="btn btn-success" value="Comprar"/>
+        </div>
+    }
     <span class="lead">
         @Model.Descricao
     </span>
