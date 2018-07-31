@@ -1,4 +1,5 @@
-﻿@model Quiron.LojaVirtual.Dominio.Entidade.Produto
+﻿@using Microsoft.Ajax.Utilities
+@model Quiron.LojaVirtual.Dominio.Entidade.Produto
 
 @{
     ViewBag.Title = "Alterar " + @Model.Nome;
@@ -9,36 +10,46 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3>Alterar - @Model.Nome</h3>
+        @if (!(@Model.Nome.IsNullOrWhiteSpace()))
+        {
+            <h3>Alterar - @Model.Nome</h3>
+        }
+        else
+        {
+            <h3>Inserir</h3>
+        }
     </div>
 
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("Alterar", "Produto"))
     {
         <div class="panel-body">
             @Html.HiddenFor(m => m.ProdutoId) @*Cria um Input do tipo Hidden com o id do produto como valor*@
-            
+
             @*Acessa todas as propriedades do model*@
             @foreach (var property in ViewData.ModelMetadata.Properties)
             {
-                @if (property.PropertyName != "ProdutoId")
-                 {
-                     <div class="form-group">
-                         <label>@(property.DisplayName ?? property.PropertyName)</label>
-                         @if (property.PropertyName == "Descricao")
-                         {
-                             @Html.TextArea(property.PropertyName, null, new {@class = "form-control", rows = 5})
-                         }
-                         else
-                         {
-                             @Html.TextBox(property.PropertyName, null, new {@class = "form-control"})
-                         }
-                     </div>
-                 }
+                if (property.PropertyName != "ProdutoId")
+                {
+                    <div class="form-group">
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        @if (property.PropertyName == "Descricao")
+                        {
+                            @Html.TextArea(property.PropertyName, null, new { @class = "form-control", rows = 5 })
+                        }
+                        else
+                        {
+                            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                        }
+
+                        @*Inserindo validação(Model Validation) para cada item do Produto*@
+                        @Html.ValidationMessage(property.PropertyName)
+                    </div>
+                }
             }
         </div>
         <div class="panel-footer">
-            <input type="submit" value="Salvar" class="btn btn-primary"/>
-            @Html.ActionLink("Cancelar e retornar", "Index", null, new {@class = "btn btn-default"})
+            <input type="submit" value="Salvar" class="btn btn-primary" />
+            @Html.ActionLink("Cancelar e retornar", "Index", null, new { @class = "btn btn-default" })
         </div>
     }
 

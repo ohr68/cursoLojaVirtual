@@ -11,16 +11,17 @@
 
 
     <div>
-        @if (TempData["mensagem"] != null)
-        {
-            <div class="alert alert-success">@TempData["mensagem"]</div>
-        }
+        @*@if (TempData["mensagem"] != null)
+        {*@
+            <div class="" id="divExcluir"></div>
+        @*}*@
 
         @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/Administrativo")
     @RenderSection("scripts", required: false)
 </body>
 </html>

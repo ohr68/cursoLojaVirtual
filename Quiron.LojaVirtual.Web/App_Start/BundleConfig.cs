@@ -18,6 +18,11 @@ namespace Quiron.LojaVirtual.Web.App_Start
                 "~/Scripts/Global.js"
              ));
 
+            bundles.Add(new ScriptBundle("~/bundles/Administrativo").Include(
+                "~/Scripts/jquery.validate.js",
+                "~/Scripts/jquery.validate.unobtrusive.js",
+                "~/Scripts/jQueryFixes.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/bootstrap.css",
                 "~/Content/Site.css"
@@ -25,7 +30,8 @@ namespace Quiron.LojaVirtual.Web.App_Start
 
             bundles.Add(new StyleBundle("~/Content/Administrativo").Include(
                 "~/Content/bootstrap.css",
-                "~/Content/bootstrap-theme.css"));
+                "~/Content/bootstrap-theme.css",
+                "~/Content/Site.css"));
         }
     }
 }
