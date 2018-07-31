@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <title>@ViewBag.Title - Quiron - Administrativo</title>
+    @Styles.Render("~/Content/Administrativo")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+
+
+    <div>
+        @if (TempData["mensagem"] != null)
+        {
+            <div class="alert alert-success">@TempData["mensagem"]</div>
+        }
+
+        @RenderBody()
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

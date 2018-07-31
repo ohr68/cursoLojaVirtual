@@ -22,6 +22,10 @@ namespace Quiron.LojaVirtual.Web.App_Start
                 "~/Content/bootstrap.css",
                 "~/Content/Site.css"
                 ));
+
+            bundles.Add(new StyleBundle("~/Content/Administrativo").Include(
+                "~/Content/bootstrap.css",
+                "~/Content/bootstrap-theme.css"));
         }
     }
 }
