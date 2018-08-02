@@ -42,6 +42,7 @@ namespace Quiron.LojaVirtual.Web.Controllers
                             !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
                             return Redirect(returnUrl);
 
+                        return RedirectToAction("Index", "Produto", new {area = "Administrativo"});
                     }
                 }
                 else

@@ -5,6 +5,13 @@
 }
 
 <div class="well">
+    
+    @if(Model.Imagem != null)
+    {
+        <div class="pull-left" style="margin-right: 10px; margin-bottom: -10px">
+            <img class="img-thumbnail" width="120" height="120" style="margin-top: -12px;" src="@Url.Action("ObterImagem","Vitrine", new {Model.ProdutoId})"/>
+        </div>
+    }
 
     <h3><strong>@Model.Nome</strong></h3>
 
