@@ -22,26 +22,13 @@ namespace Quiron.LojaVirtual.Web.Controllers
 
             if (produto != null)
             {
-                ObterCarrinho().AdicionarItem(produto, 1);
+                carrinho.AdicionarItem(produto, 1);
             }
 
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        private Carrinho ObterCarrinho()
-        {
-            Carrinho carrinho = (Carrinho)Session["Carrinho"];
-
-            if (carrinho == null)
-            {
-                carrinho = new Carrinho();
-                Session["Carrinho"] = carrinho;
-            }
-
-            return carrinho;
-        }
-
-        public RedirectToRouteResult Remover(Carrinho carrinho,int produtoId, string returnUrl)
+       public RedirectToRouteResult Remover(Carrinho carrinho,int produtoId, string returnUrl)
         {
             _repositorio = new ProdutosRepositorio();
 
@@ -50,24 +37,23 @@ namespace Quiron.LojaVirtual.Web.Controllers
 
             if (produto != null)
             {
-                ObterCarrinho().RemoverItem(produto);
+                carrinho.RemoverItem(produto);
             }
 
             return RedirectToAction("Index", new {returnUrl});
         }
 
-        public ViewResult Index(string returnurl)
+        public ViewResult Index(Carrinho carrinho,string returnurl)
         {
             return View(new CarrinhoViewModel
             {
-                Carrinho = ObterCarrinho(),
+                Carrinho = carrinho,
                 ReturnUrl = returnurl
             });
         }
 
-        public PartialViewResult Resumo()
-        {
-            Carrinho carrinho = ObterCarrinho();
+        public PartialViewResult Resumo(Carrinho carrinho)
+        {         
             return PartialView(carrinho);
         }
 
@@ -77,9 +63,8 @@ namespace Quiron.LojaVirtual.Web.Controllers
         }
 
         [HttpPost]
-        public ViewResult FecharPedido(Pedido pedido)
+        public ViewResult FecharPedido(Carrinho carrinho,Pedido pedido)
         {
-            Carrinho carrinho = ObterCarrinho();
             EmailConfiguracoes email = new EmailConfiguracoes
             {
                 EscreverArquivo = bool.Parse(ConfigurationManager.AppSettings["Email.EscreverArquivo"] ?? "false")
